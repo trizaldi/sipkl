@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10 Jul 2020 pada 02.05
+-- Generation Time: 15 Jul 2020 pada 09.03
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -37,6 +37,13 @@ CREATE TABLE `tmst_kelompok` (
   `NIM_a4` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tmst_kelompok`
+--
+
+INSERT INTO `tmst_kelompok` (`id_kelompok`, `NIM_k`, `NIM_a1`, `NIM_a2`, `NIM_a3`, `NIM_a4`) VALUES
+('', 'E3111111', 'E3114242', 'E31151328', 'E31151415', 'E3115242');
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +72,13 @@ CREATE TABLE `tmst_usulan` (
   `stat_usulan` enum('1','2','3','') NOT NULL,
   `stat_verifikasi` enum('1','2','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tmst_usulan`
+--
+
+INSERT INTO `tmst_usulan` (`id_usulan`, `id_kelompok`, `id_lokasi`, `id_tahun`, `stat_usulan`, `stat_verifikasi`) VALUES
+('1', '', 3, 1, '1', '1');
 
 -- --------------------------------------------------------
 
@@ -104,7 +118,8 @@ CREATE TABLE `tm_jurusan` (
 --
 
 INSERT INTO `tm_jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
-(1, 'teknologi informasi');
+(1, 'teknologi Informasi'),
+(3, 'Teknologi Pertanian');
 
 -- --------------------------------------------------------
 
@@ -114,9 +129,19 @@ INSERT INTO `tm_jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
 
 CREATE TABLE `tm_kota` (
   `id_kota` tinyint(4) NOT NULL,
-  `kota` int(11) NOT NULL,
+  `kota` varchar(11) NOT NULL,
   `id_provinsi` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tm_kota`
+--
+
+INSERT INTO `tm_kota` (`id_kota`, `kota`, `id_provinsi`) VALUES
+(1, 'situbondo', 1),
+(2, 'jember', 1),
+(4, 'Sidoarjo', 1),
+(5, 'besuki', 1);
 
 -- --------------------------------------------------------
 
@@ -157,6 +182,15 @@ CREATE TABLE `tm_lokasi` (
   `latitude` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tm_lokasi`
+--
+
+INSERT INTO `tm_lokasi` (`id_lokasi`, `nama_lokasi`, `alamat`, `telp`, `id_kota`, `kode_pos`, `longitude`, `latitude`) VALUES
+(1, 'PLN Situbondo', 'Jl. Krajan Timur, Sumber Kolak, Panarukan', '0813364257834', 1, '1234', 'perlu verifikasi pak taufiq', 'perlu verifikasi pak taufiq'),
+(3, 'PT POS', 'Jl. ArjasaSukosari, Sukowono', '09876543', 2, '68191', 'perlu verifikasi pak taufiq', 'perlu verifikasi pak taufiq'),
+(4, 'POLIJE', 'Jl. MastripKabupaten Jember, Jawa Timur', '09876543', 2, '68121', 'perlu verifikasi pak taufiq', 'perlu verifikasi pak taufiq');
+
 -- --------------------------------------------------------
 
 --
@@ -178,8 +212,12 @@ CREATE TABLE `tm_mahasiswa` (
 --
 
 INSERT INTO `tm_mahasiswa` (`NIM`, `nama_mhs`, `telp`, `id_prodi`, `id_angkatan`, `id_level`, `password`) VALUES
+('E3111111', 'Otaku Dio', '0876542424', 1, 1, 1, '6677f9393fb97ef713ca699e3421d743'),
+('E3114242', 'Arif rahman', '0888887676', 1, 1, 1, 'a6f7575daec0a033cfeee52893fa9ab5'),
 ('E31151328', 'Wahyu Faith', '08133642578', 1, 1, 1, '62d8dc2a7f79c0129c4cc2ac5fa0a854'),
-('E41190059', 'Wahyu Pebrianto', '089524426802', 1, 1, 1, 'd62dc6f84187021a31186fad7a12743e');
+('E31151415', 'Deny pradana', '08989898989', 1, 1, 1, '48a4ce9e6e929d59f1ca70a0755ae8b6'),
+('E3115242', 'Dona nirwana', '0812234563', 1, 1, 1, '583024ef87917f49779deac12b4901c8'),
+('E41190059', 'Wahyu Pebrianto', '089524426802', 1, 5, 1, 'e55dd9bb1581c7d6c9ad8d83649efa49');
 
 -- --------------------------------------------------------
 
@@ -204,7 +242,7 @@ INSERT INTO `tm_pegawai` (`NIP`, `nama_pegawai`, `gelar`, `id_level`, `id_prodi`
 ('001', 'Taufiq Rizaldi', 'S2', 2, 1, 'dc5c7986daef50c1e02ab09b442ee34f'),
 ('002', 'Indri', 'S1', 3, 3, '93dd4de5cddba2c733c65f233097f05a'),
 ('003', 'Hermawan Arif Putranto', 'S1', 4, 1, 'e88a49bccde359f0cabb40db83ba6080'),
-('004', 'Hendra Yufit Riskiawan, S.Kom, M.Cs', 'S2', 5, 1, '11364907cf269dd2183b64287156072a');
+('004', 'Hendra Yufit Riskiawan, S.Kom, M.Cs', 'S2', 5, 3, 'd690210ac1460c6024c01e6c34ea2618');
 
 -- --------------------------------------------------------
 
@@ -237,6 +275,14 @@ CREATE TABLE `tm_provinsi` (
   `id_provinsi` tinyint(4) NOT NULL,
   `nama_provinsi` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tm_provinsi`
+--
+
+INSERT INTO `tm_provinsi` (`id_provinsi`, `nama_provinsi`) VALUES
+(1, 'jawa timur'),
+(2, 'jawa tengah');
 
 -- --------------------------------------------------------
 
@@ -406,13 +452,13 @@ ALTER TABLE `tm_angkatan`
 -- AUTO_INCREMENT for table `tm_jurusan`
 --
 ALTER TABLE `tm_jurusan`
-  MODIFY `id_jurusan` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_jurusan` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tm_kota`
 --
 ALTER TABLE `tm_kota`
-  MODIFY `id_kota` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kota` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tm_level`
@@ -424,7 +470,7 @@ ALTER TABLE `tm_level`
 -- AUTO_INCREMENT for table `tm_lokasi`
 --
 ALTER TABLE `tm_lokasi`
-  MODIFY `id_lokasi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_lokasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tm_prodi`
@@ -436,7 +482,7 @@ ALTER TABLE `tm_prodi`
 -- AUTO_INCREMENT for table `tm_provinsi`
 --
 ALTER TABLE `tm_provinsi`
-  MODIFY `id_provinsi` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_provinsi` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tm_tahun`

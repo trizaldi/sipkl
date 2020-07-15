@@ -22,7 +22,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
+                <a href="<?php echo base_url() ?>Mahasiswa/tampil_lokasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Lokasi</p>
                 </a>
@@ -58,9 +58,17 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="<?php echo base_url() ?>Mahasiswa/daftar_pkl_langsung" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengajuan PKL</p>
+                </a>
+              </li>
+            </ul>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
                 <a href="pages/layout/boxed.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Update usulan</p>
+                  <p>Usulan Lokasi Baru</p>
                 </a>
               </li>
             </ul>

@@ -35,6 +35,8 @@
 
         <?php
         foreach ($data_edit_mahasiswa as $value){
+          $prodi_mahasiswa=$value->nama_prodi;
+          $angkatan_mahasiswa=$value->angkatan;
 
 
             ?>
@@ -60,21 +62,25 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-5">
-                  <label>Program Studi :</label>
+                  <label>Prodi :</label>
                   <select name="prodi" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" value="1">MIF</option>
-                    <option value="2">TKK</option>
-                    <option value="3">TIF</option>
+                   <?php foreach ($data_prodi->result_array() as $prodi) :
+                       $id=$prodi['id_prodi'];
+                       $prodi['nama_prodi'];
+                       $selected = ($prodi_mahasiswa ==$prodi['nama_prodi']) ? 'selected' : '';
+                    ?>
+                    <option value="<?php echo $id ?>" <?= $selected; ?> class=""><?php echo $prodi['nama_prodi'] ?></option><?php endforeach;?>
                   </select>
-                </div>
+                </div>  
     <div class="form-group col-md-5">
                   <label>Angkatan :</label>
                   <select name="angkatan" class="form-control select2" style="width: 100%;">
                    <?php foreach ($data_angkatan->result_array() as $angkatan) :
                        $id=$angkatan['id_angkatan'];
                        $angkatan=$angkatan['angkatan'];
+                       $selected = ($angkatan_mahasiswa ==$angkatan) ? 'selected' : '';
                     ?>
-                    <option value="<?php echo $id ?>"><?php echo $angkatan ?></option><?php endforeach;?>
+                    <option value="<?php echo $id ?>" <?= $selected; ?> class=""><?php echo $angkatan ?></option><?php endforeach;?>
                   </select>
                 </div>                
 </div>

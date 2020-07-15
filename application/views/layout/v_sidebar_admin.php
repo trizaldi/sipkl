@@ -5,7 +5,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="<?php echo base_url()?>Admin" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -28,37 +28,37 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                <a href="<?php echo base_url()?>Admin/tampil_pegawai" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Pegawai</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
+                <a href="<?php echo base_url()?>Admin/tampil_lokasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Lokasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                <a href="<?php echo base_url()?>Admin/tampil_jurusan" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Jurusan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
+                <a href="<?php echo base_url()?>Admin/tampil_prodi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Prodi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
+                <a href="<?php echo base_url()?>Admin/tampil_provinsi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Provinsi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                <a href="<?php echo base_url()?>Admin/tampil_kota" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Kota</p>
                 </a>
@@ -66,7 +66,7 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview">
+     <!--      <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -76,22 +76,22 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
+                <a href="<?php echo base_url()?>Admin/tampil_user" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>User</p>
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-header">PROFILE</li>
-          <li class="nav-item">
+          </li>-->
+          <li class="nav-header">ADMINISTRATOR</li>
+          <!--<li class="nav-item">
             <a href="pages/gallery.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Menu Profile
               </p>
             </a>
-          </li>
+          </li>-->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -56,16 +56,6 @@
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required autofocus="">
                   </div>
-                <div class="form-group">
-                  <label>Hak Akses</label>
-                  <select name="level" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" value="1">Mahasiswa</option>
-                    <option value="2">Korbid PKL</option>
-                    <option value="3">Admin PRODI</option>
-                    <option value="4">Admin</option>
-                    <option value="5">Jurusan</option>
-                  </select>
-                </div>
             <div class="checkbox">
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

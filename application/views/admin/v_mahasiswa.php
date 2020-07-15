@@ -33,20 +33,19 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>No</th>
+                    <th width="10">No</th>
                     <th>NIM</th>
                     <th>Nama</th>
                     <th>Nomor Telepon</th>
                     <th>Program Studi</th>
                     <th>Tahun angkatan</th>
-                    <th>Aksi</th>
+                    <th width="10">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                    <?php
-                    $no=0;
+                    $no=1;
                     foreach ($data->result_array() as $mahasiswa) :
-                      $no++;
                        $nim=$mahasiswa['NIM'];
                        $nama=$mahasiswa['nama_mhs'];
                        $telp=$mahasiswa['telp'];
@@ -70,15 +69,7 @@
                   </tr>
                   </tbody>
                   <tfoot>
-                  <tr>
-                    <th>No</th>
-                    <th>NIM</th>
-                    <th>Nama</th>
-                    <th>Nomor Telepon</th>
-                    <th>Program Studi</th>
-                    <th>Tahun angkatan</th>
-                    <th>Aksi</th>
-                  </tr>
+
                   </tfoot>
                 </table>
               </div>
