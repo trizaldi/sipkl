@@ -84,6 +84,7 @@ function auth(){
                 $this->session->set_userdata('masuk',TRUE);
                  if($this->session->userdata('level')==2 & $this->session->userdata('password')==TRUE){
                     $this->session->set_userdata('akses','2');
+                    $this->session->set_userdata('ses_prodi',$data['id_prodi']);
                     $this->session->set_userdata('ses_id',$data['NIP']);
                     $this->session->set_userdata('ses_nama',$data['nama_pegawai']);
                     redirect('Korbidpkl');
@@ -122,6 +123,7 @@ function auth(){
                             if($this->session->userdata('level')==1 & $this->session->userdata('password')==TRUE){
                                 $this->session->set_userdata('akses','1');
                                 $this->session->set_userdata('ses_id',$data['NIM']);
+                                $this->session->set_userdata('ses_prodi',$data['id_prodi']);
                                 $this->session->set_userdata('ses_angkatan',$data['id_angkatan']);
                                 $this->session->set_userdata('ses_nama',$data['nama_mhs']);
                                 redirect('Mahasiswa');

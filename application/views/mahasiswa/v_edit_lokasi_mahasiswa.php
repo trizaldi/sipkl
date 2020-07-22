@@ -32,7 +32,12 @@
           </div>
           <div class="card-body">
             <div class="row">
+        <?php
+        foreach ($data_edit_lokasi as $value){
+          #$lokasi_kota=$value->id_kota;
 
+
+            ?>
 <div class="container">
   <form class="form-horizontal" action="<?php echo base_url()?>Mahasiswa/insert_ajukan_lokasi" method="post" enctype="multipart/form-data">
 <input type="hidden" name="tahun" class="form-control" id="inputZip" required value="<?php echo $this->session->userdata('ses_angkatan')?>">
@@ -41,9 +46,9 @@
     <div class="form-group col-md-5">
                   <label>Pilih Kota :</label>
                   <select name="kota" id="kota" class="form-control select2" style="width: 100%;">
-                  <?php foreach($data->result() as $row):?>
+                  <?php foreach($data->result() as $row){?>
                    <option value="<?php echo $row->id_kota;?>"><?php echo $row->kota;?></option>
-                   <?php endforeach;?>
+                   <?php };?>
 
                   </select>
                 </div>
@@ -56,6 +61,8 @@
 </div>
   <a href="<?php echo base_url()?>Mahasiswa/daftar_pkl_langsung" class="btn btn-secondary">Kembali</a>
   <button type="submit" class="btn btn-primary">Simpan Lokasi</button>
+<?php }
+            ?>
 </form>
 </div>
           </div>

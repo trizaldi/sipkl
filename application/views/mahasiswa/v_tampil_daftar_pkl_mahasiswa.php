@@ -1,39 +1,49 @@
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard </h1>
-          </div><!-- /.col -->
+            <h1 class="m-0 text-dark">Mahasiswa Pengajuan PKL </h1>
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item active">Mahasiswa Pengajuan PKL</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <section class="content">
 
 
-    <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title"><B>DATA PENGAJUAN LOKASI</B></h3>
+    <div class='row'>
+          <div class='col-12'>
+            <div class='card'>
+              <div class='card-header'>
+                <h3 class='card-title'><B>DATA PENGAJUAN LOKASI</B></h3>
 
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-<a href="<?php echo base_url()?>Mahasiswa/tambah_lokasi_mahasiswa"><button type="button" class="btn btn-lg btn-primary">Ajukan Lokasi</button></a>
-<br><br>
-                <table id="example1" class="table table-bordered table-striped">
+
+<div class='card-body'>
+  <?php
+    if($data_usulan_lokasi->num_rows()>0)
+    {
+      foreach ($data_usulan_lokasi->result() as $row)
+      {
+               echo "<div class='alert alert-success' role='alert'>Anda Telah memilih lokasi PKL Silahkan Tunggu Verifikasi!</div>";
+      }
+      }
+      else
+      {
+        echo "<button type='button' onclick='button()' id='tombol_tambah_lokasi' class='btn btn-lg btn-primary'>Ajukan Lokasi PKL</button>";
+      }?>   
+                <table id='example1' class='table table-bordered table-striped'>
                   <thead>
-                  <tr class="table-success">
-                    <th width="10">No</th>
+                  <tr class='table-success'>
+                    <th width='10'>No</th>
                     <th>Nama Lokasi</th>
                     <th>Alamat</th>
                     <th>telp</th>
@@ -53,9 +63,7 @@
                        $kota=$lokasi['kota'];
                        $status_usulan=$lokasi['stat_usulan'];
                        $status_verifikasi=$lokasi['stat_verifikasi'];
-                       #$kode_pos=$lokasi['kode_pos'];
-                       #$longitude=$lokasi['longitude'];
-                       #$latitude=$lokasi['latitude'];
+
                     ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
@@ -64,7 +72,7 @@
                     <td><?php echo $telp ?></td>
                     <td><?php echo $kota ?></td>
                     <td><?php if ($status_usulan==1){
-                      echo "Usulan";
+                      echo 'Usulan';
                       }elseif ($status_usulan=2) {
                         echo 'Setujui';
                       }
@@ -74,11 +82,12 @@
                       ?></td>
 
                     <td><?php if ($status_verifikasi==1){
-                      echo "Belum Diverifikasi";
+                      echo 'Belum Diverifikasi';
                       }else{
                         echo 'Telah Diverifikasi';
                       }
                       ?></td>
+  
                     <?php endforeach;?>
                   </tr>
                   </tbody>
@@ -91,31 +100,41 @@
 
 
               </div>    
-              <!-- /.card-body -->
+
             </div>
-            <!-- /.card -->
           </div>
         </div>
 
  <!--section kedua -->
 
-     <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title"><B>DATA KELOMPOK</B></h3>
+     <div class='row' id='kelompok'>
+          <div class='col-12'>
+            <div class='card'>
+              <div class='card-header'>
+                <h3 class='card-title'><B>DATA KELOMPOK</B></h3>
 
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-<a href="<?php echo base_url()?>Mahasiswa/tambah_kelompok_mahasiswa"><button type="button" class="btn btn-lg btn-danger">Ajukan Kelompok</button></a>
-<br><br>
-                <table id="example1" class="table table-bordered table-striped">
+              <div class='card-body'>
+<!--<a  class='btn' data-toggle='modal' data-target='#ModalKelompok'><button type='button'  class='btn btn-lg btn-danger'>Ajukan Kelompok PKL</button></a>-->
+ <?php
+    if($data_mahasiswa_1->num_rows()>0)
+    {
+      foreach ($data_mahasiswa_1->result() as $row)
+      {
+               echo "<div class='alert alert-success' role='alert'>Anda Telah Mengisi Data Kelompok Silahkan Tunggu Verifikasi!</div>";
+      }
+      }
+      else
+      {
+        echo "<button type='button' onclick='tombol_kelompok()' id='tombol_tambah_lokasi'  class='btn btn-lg btn-danger'>Ajukan Kelompok PKL</button></a>";
+      }?>   
+
+                <table id='example1' class='table table-bordered table-striped'>
                   <thead>
-                  <tr class="table-success">
-                    <th width="10">No</th>
-                    <th width="20%">Identitas Kelompok</th>
-                    <th width="20%">NIM</th>
+                  <tr class='table-success'>
+                    <th width='10'>No</th>
+                    <th width='20%'>Identitas Kelompok</th>
+                    <th width='20%'>NIM</th>
                     <th >Nama Anggota</th>
                     <th >PRODI</th>
                     <th >Angkatan</th>
@@ -211,23 +230,100 @@
                   </tbody>
                 </table>
 
-
-
-
-
               </div>    
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
         </div> 
 
 
-
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+  <script type='text/javascript'>
+
+function button() {
+    location.href='<?php echo base_url()?>Mahasiswa/tambah_lokasi_mahasiswa';
+};
+function tombol_kelompok() {
+    location.href='<?php echo base_url()?>Mahasiswa/tambah_kelompok_mahasiswa';
+};
+  </script>
+
+ <!-- <div id='ModalLokasi' class='modal fade bs-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='classInfo' aria-hidden='true'>
+  <div class='modal-dialog modal-lg'>
+    <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'><span class='fa fa-close'></span></span></button>
+                        <h4 class='modal-title' id='myModalLabel'><b>Ajukan Lokasi PKL</b></h4>
+                    </div>
+      <div class='modal-body'>
+<div class='container'>
+  <form class='form-horizontal' id='form_tambah_lokasi' method='post' enctype='multipart/form-data'>
+<input type='hidden' name='tahun' class='form-control' id='inputZip' required value=' <?php echo $this->session->userdata('ses_angkatan')?>'>
+  <div class='form-row'>
+    <div class='form-group col-md-5'>
+                  <label>Pilih Kota :</label>
+                  <select name='kota' id='kota' class='form-control select2' style='width: 100%;'>
+                  <?php foreach($data->result() as $row):?>
+                   <option value='<?php echo $row->id_kota;?>'><?php echo $row->kota;?></option>
+                   <?php endforeach;?>
+
+                  </select>
+                </div>
+    <div class='form-group col-md-5'>
+                  <label>Pilih Lokasi :</label>
+                  <select name='lokasi' id='lokasi' class='form-control select2' style='width: 100%;'>
+                  </select>
+                </div>                
+</div>
+  <a href='<?php echo base_url()?>Admin/tampil_mahasiswa' class='btn btn-secondary'>Kembali</a>
+  <button type='submit' id='save' class='btn btn-primary'>Simpan</button>
+</form>
+</div>
+      </div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-primary' data-dismiss='modal'>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>-->
+<script type='text/javascript'>
+    $(document).ready(function(){
+    $('#kota').change(function(){
+      var id=$(this).val();
+      $.ajax({
+        url : '<?php echo base_url();?>Mahasiswa/find_lokasi',
+        method : 'POST',
+        data : {id: id},
+        async : false,
+            dataType : 'json',
+        success: function(data){
+          var html = '';
+                var i;
+                for(i=0; i<data.length; i++){
+                    html += '<option value='+data[i].id_lokasi+'>'+data[i].nama_lokasi+'</option>';
+                }
+                $('#lokasi').html(html);
+          
+        }
+      });
+    });
+  $('#save').click(function(){
+    var data = $('#form_tambah_lokasi').serialize();
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url()?>Mahasiswa/insert_ajukan_lokasi',
+      data: data,
+      success: function() {
+        alert('Data berhasil disimpan');
+      }
+    });
+  });
+
+  
+      });
+
+</script>
   

@@ -70,6 +70,9 @@ public function daftar_pkl_langsung(){
      	$isi['data']				=$this->M_lokasi->get_lokasi();
      	$isi['data_mahasiswa']		=$this->M_mahasiswa->get_mahasiswa();
      	$isi['data_usulan_lokasi']	=$this->M_mahasiswa->get_usulan_lokasi();
+     	$isi['data']			=$this->M_kota->get_kota();
+     	$isi['data_prodi']		=$this->M_prodi->get_prodi();
+     	$isi['data_angkatan']		=$this->M_mahasiswa->get_angkatan();     	
      	$isi['data_mahasiswa_1']	=$this->M_mahasiswa->mahasiswa_1();
      	$isi['data_mahasiswa_2']	=$this->M_mahasiswa->mahasiswa_2();
      	$isi['data_mahasiswa_3']	=$this->M_mahasiswa->mahasiswa_3();
@@ -89,20 +92,6 @@ public function daftar_pkl_langsung(){
 		$data=$this->M_mahasiswa->get_lokasi($id);
 		echo json_encode($data);
 	}
-function insert_ajukan_lokasi(){
-	if($this->session->userdata('akses')=='1'){
-		$status_usulan				='1';
-		$status_verifikasi			='1';
-		$lokasi						=$this->input->post("lokasi");
-		$tahun						=$this->input->post("tahun");
-				
-		$this->M_mahasiswa->add_ajukan_lokasi_pkl($lokasi,$tahun,$status_usulan,$status_verifikasi);
-		redirect("Mahasiswa/daftar_pkl_langsung");
-		}else{
-            $url=base_url();
-			redirect($url);
-    }
-}
 public function tambah_lokasi_mahasiswa(){
 	if($this->session->userdata('akses')=='1'){
      	$isi['data']		=$this->M_kota->get_kota();
@@ -117,11 +106,27 @@ public function tambah_lokasi_mahasiswa(){
 			redirect($url);
     }
 }
+function insert_ajukan_lokasi(){
+	if($this->session->userdata('akses')=='1'){
+		$status_usulan				='1';
+		$status_verifikasi			='1';
+		$lokasi						=$this->input->post("lokasi");
+		$tahun						=$this->input->post("tahun");
+		$NIM_k						=$this->input->post("nim_k");				
+		$this->M_mahasiswa->add_ajukan_lokasi_pkl($lokasi,$tahun,$status_usulan,$status_verifikasi,$NIM_k);
+		redirect("Mahasiswa/daftar_pkl_langsung");
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+}
 // 2. Ajukan kelompok PKL
 public function tambah_kelompok_mahasiswa(){
 	if($this->session->userdata('akses')=='1'){
      	$isi['data_prodi']			=$this->M_prodi->get_prodi();
      	$isi['data_angkatan']		=$this->M_mahasiswa->get_angkatan();
+     	$isi['data_mahasiswa']	=$this->M_mahasiswa->get_mahasiswa_prodi();
+     	$isi['data_usulan_lokasi']	=$this->M_mahasiswa->get_usulan_lokasi();
 		$isi['content'] 			='mahasiswa/v_daftar_tambah_kelompok_mahasiswa';
 		$isi['judul']				='Isi Data Kelompok';
 		$isi['sub_judul']			='Ajukan Kelompok';
@@ -131,26 +136,28 @@ public function tambah_kelompok_mahasiswa(){
 			redirect($url);
     }
 }
-function proses_daftar_mahasiswa(){
-	if($this->session->userdata('akses')=='1'){
-		$isi['content'] 			='mahasiswa/v_tampil_mahasiswa';
-		$isi['judul']				='Isi Data Kelompok';
-		$isi['sub_judul']			='Ajukan Kelompok';
-		if(isset($_POST['Submit'])) {
-			$prodi 	  = $_POST['prodi'];
-			$angkatan = $_POST['angkatan'];
+#function proses_daftar_mahasiswa(){
+#	if($this->session->userdata('akses')=='1'){
+#		$isi['content'] 			='mahasiswa/v_tampil_mahasiswa';
+#		$isi['judul']				='Isi Data Kelompok';
+#		$isi['sub_judul']			='Ajukan Kelompok';
+#		$isi['data_mahasiswa']	=$this->M_mahasiswa->get_mahasiswa_prodi();
+		#if(isset($_POST['Submit'])) {
+		#	$prodi 	  = $_POST['prodi'];
+		#	$angkatan = $_POST['angkatan'];
 			#$prodi					=$this->input->post("prodi");
 			#$angkatan				=$this->input->post("angkatan");
-			$isi['data_mahasiswa']	=$this->M_mahasiswa->get_mahasiswa_prodi($prodi,$angkatan);
+		#	$isi['data_mahasiswa']	=$this->M_mahasiswa->get_mahasiswa_prodi($prodi,$angkatan);
 
-		$this->load->view('layout/v_template',$isi);
-		}
-		else{
-            $url=base_url();
-			redirect($url);
-    }
-}
-}
+		#$this->load->view('layout/v_template',$isi);
+#		$this->load->view('layout/v_template',$isi);
+#		}
+		
+#		else{
+ #           $url=base_url();
+#			redirect($url);
+ #   }
+#}
 function daftar_mahasiswa(){
 	if($this->session->userdata('akses')=='1'){
 		$prodi						=$this->input->post("prodi");
@@ -168,25 +175,25 @@ function daftar_mahasiswa(){
 }
 function insert_usulan_kelompok(){
 	if($this->session->userdata('akses')=='1'){
+		$lokasi						=$this->input->post("id_lokasi");
 		$mahasiswa_1				=$this->input->post("mahasiswa_1");
 		$mahasiswa_2				=$this->input->post("mahasiswa_2");
 		$mahasiswa_3				=$this->input->post("mahasiswa_3");
 		$mahasiswa_4				=$this->input->post("mahasiswa_4");
 		$mahasiswa_5				=$this->input->post("mahasiswa_5");
-		$this->M_mahasiswa->add_kelompok_pkl($mahasiswa_1,$mahasiswa_2,$mahasiswa_3,$mahasiswa_4,$mahasiswa_5);
+		$this->M_mahasiswa->add_kelompok_pkl($lokasi,$mahasiswa_1,$mahasiswa_2,$mahasiswa_3,$mahasiswa_4,$mahasiswa_5);
 		redirect("Mahasiswa/daftar_pkl_langsung");
 		}else{
             $url=base_url();
 			redirect($url);
     }
 }
-/*	function find_mahasiswa(){
-		$id=$this->input->post('id_prodi');
-		$id_tahun=$this->input->post('id_tahun');
-		$data=$this->M_mahasiswa->get_mahasiswa_prodi($id,$id_tahun);
+	function find_mahasiswa(){
+		$id=$this->input->post('id');
+		$data=$this->M_mahasiswa->get_mahasiswa_angkatan($id);
 		echo json_encode($data);
 	}
-function insert_usulan_kelompok(){
+/*function insert_usulan_kelompok(){
 	if($this->session->userdata('akses')=='1'){
 		$status_usulan				='usulan';
 		$status_verifikasi			='belum verifikasikasi';
