@@ -29,9 +29,9 @@
 
 <div class='card-body'>
   <?php
-    if($data_usulan_lokasi->num_rows()>0)
+    if($data_akses_mahasiswa->num_rows()>0)
     {
-      foreach ($data_usulan_lokasi->result() as $row)
+      foreach ($data_akses_mahasiswa->result() as $row)
       {
                echo " <div class='container'> <div class='alert alert-success' role='alert'>
     <strong>Berhasil! </strong>Anda Telah memilih lokasi PKL Silahkan Tunggu Verifikasi!</div></div>";

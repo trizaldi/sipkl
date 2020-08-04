@@ -109,14 +109,16 @@ function get_mahasiswa_angkatan($id){
  // 1. query tampil Usulan lokasi
 
 function get_akses_mahasiswa(){
-        $query=$this->db->query("SELECT*FROM tm_mahasiswa
-WHERE NOT EXISTS (SELECT * FROM tmst_kelompok
-WHERE tm_mahasiswa.NIM = tmst_kelompok.NIM_k)
-AND NOT EXISTS (SELECT * FROM tmst_kelompok WHERE tm_mahasiswa.NIM = tmst_kelompok.NIM_a1)
-AND NOT EXISTS (SELECT * FROM tmst_kelompok WHERE tm_mahasiswa.NIM = tmst_kelompok.NIM_a2)
-AND NOT EXISTS (SELECT * FROM tmst_kelompok WHERE tm_mahasiswa.NIM = tmst_kelompok.NIM_a3)
-AND NOT EXISTS (SELECT * FROM tmst_kelompok WHERE tm_mahasiswa.NIM = tmst_kelompok.NIM_a4)
-AND tm_mahasiswa.NIM='".$this->session->userdata('ses_id')."'");
+    $nim=$this->session->userdata('ses_id');
+
+        $query=$this->db->query("SELECT*FROM tmst_kelompok
+         JOIN tmst_usulan ON tmst_kelompok.id_usulan=tmst_usulan.id_usulan
+          WHERE tmst_kelompok.NIM_k='$nim'
+            OR tmst_kelompok.NIM_a1='$nim'
+            OR tmst_kelompok.NIM_a2='$nim'
+            OR tmst_kelompok.NIM_a3='$nim'
+            OR tmst_kelompok.NIM_a4='$nim'
+            AND tmst_usulan.stat_usulan='1'");
         return $query;
     }
     function get_kode_usulan(){
@@ -277,6 +279,7 @@ function mahasiswa_5(){
          WHERE tmst_kelompok.NIM_k='".$this->session->userdata('ses_id')."'");
          return $hasil;
      }
+
 //MAHASISWA USULAN LOKASI BARU
     function get_usulan_lokasi_baru(){
         $query=$this->db->query("SELECT ts_lokasi.id_lok_usul,
@@ -333,6 +336,28 @@ function mahasiswa_5(){
         $hasil=$this->db->query("delete from ts_lokasi where id_lok_usul='$id'");
         return $hasil;
     }
+
+//MAHASISWA GENERATE_DOKUMEN
+    function get_generate_dokumen(){
+        $query=$this->db->query("SELECT ts_lokasi.id_lok_usul,
+            ts_lokasi.nama_lok,
+            ts_lokasi.alamat,
+            tS_lokasi.telp,
+            tS_lokasi.kode_pos,
+            tS_lokasi.longitude,
+            tS_lokasi.latitude,
+            ts_lokasi.NIM_k,
+            ts_lokasi.status,
+            ts_lokasi.id_kota,
+            tm_kota.kota,
+            tm_mahasiswa.NIM
+            FROM ts_lokasi 
+            INNER JOIN tm_kota ON tm_kota.id_kota=ts_lokasi.id_kota
+            INNER JOIN tm_mahasiswa ON tm_mahasiswa.NIM=ts_lokasi.NIM_k
+            WHERE ts_lokasi.NIM_k='".$this->session->userdata('ses_id')."'");
+        return $query;
+    }
+
 
 
 #KORBID PKL
@@ -471,6 +496,10 @@ function get_tolak_lokasi_mahasiswa($id){
             WHERE tm_mahasiswa.id_prodi='".$this->session->userdata('ses_prodi')."'");
         return $query;
     }
+
+
+
+
     function verifikasi_usulan_lokasi_baru($id,$nama,$alamat,$telp,$kota,$kode_pos,$longitude,$latitude,$status){
         $hasil=$this->db->query("UPDATE ts_lokasi
         SET nama_lok='$nama',alamat='$alamat',telp='$telp',id_kota='$kota',kode_pos='$kode_pos',longitude='$longitude',latitude='$latitude',
