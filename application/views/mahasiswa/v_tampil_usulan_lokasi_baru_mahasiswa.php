@@ -25,34 +25,50 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title"></h3>
-                <a href="<?php echo base_url()?>Korbidpkl/tambah_lokasi" target="_parent"><button type="button" class="btn btn-primary">Tambah</button></a>
+                  <?php
+    if($data->num_rows()>0)
+    {
+      foreach ($data->result() as $row)
+      {
+               echo "<div class='alert alert-success' role='alert'>Anda Telah Mengajukan lokasi Baru Silahkan Tunggu Verifikasi!</div>";
+      }
+      }
+      else
+      {
+        echo "<button type='button' class='btn btn-md btn-info ' onclick='button_pengajuan()' id='tombol_tambah_lokasi'><i class='fa fa-plus' aria-hidden='true'></i> Pengajuan Lokasi Baru </button></a>";
+      }?>
+                
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id='example1' class='table table-bordered table-striped'>
+                <table id="example1" class="table table-bordered table-striped">
                   <thead>
-                  <tr class='table-success'>
-                    <th width='10'>No</th>
+                  <tr>
+                    <th width="10">No</th>
                     <th>Nama Lokasi</th>
                     <th>Alamat</th>
-                    <th>telp</th>
+                    <th>No Telepon</th>
                     <th>Kota</th>
-                    <th>Status Usulan</th>
-                    <th>Status verifikasi</th>
+                    <th>Kode Pos</th>
+                    <th>Longitude</th>
+                    <th>Latitude</th>
+                    <th>Status Verifikasi</th>
+                    <th width="10">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                    <?php
                     $no=1;
-                    foreach ($data_usulan_lokasi->result_array() as $lokasi) :
-                       $id=$lokasi['id_lokasi'];
-                       $nama=$lokasi['nama_lokasi'];
+                    foreach ($data->result_array() as $lokasi) :
+                       $id=$lokasi['id_lok_usul'];
+                       $nama=$lokasi['nama_lok'];
                        $alamat=$lokasi['alamat'];
                        $telp=$lokasi['telp'];
                        $kota=$lokasi['kota'];
-                       $status_usulan=$lokasi['stat_usulan'];
-                       $status_verifikasi=$lokasi['stat_verifikasi'];
-
+                       $kode_pos=$lokasi['kode_pos'];
+                       $longitude=$lokasi['longitude'];
+                       $latitude=$lokasi['latitude'];
+                       $status=$lokasi['status'];
                     ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
@@ -60,30 +76,32 @@
                     <td><?php echo $alamat ?></td>
                     <td><?php echo $telp ?></td>
                     <td><?php echo $kota ?></td>
-                    <td><?php if ($status_usulan==1){
-                      echo 'Usulan';
-                      }elseif ($status_usulan=2) {
-                        echo 'Setujui';
+                    <td><?php echo $kode_pos ?></td>
+                    <td><?php echo $longitude ?></td>
+                    <td><?php echo $latitude ?></td>
+                    <td width="15">
+                      <?php if ($status==1){
+                      echo "<h5><span class='badge badge-info'>Usulan</span></h5>";
+
+                      }elseif ($status=2) {
+                        echo "<h5><span class='badge badge-success'>Disetujui</span></h5>";
                       }
                       else{
-                        echo 'Ditolak';
+                        echo "<h5><span class='badge badge-danger'>Ditolak</span></h5>";
                       }
                       ?></td>
-
-                    <td><?php if ($status_verifikasi==1){
-                      echo 'Belum Diverifikasi';
-                      }else{
-                        echo 'Telah Diverifikasi';
-                      }
-                      ?></td>
-  
+                    <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="<?php echo base_url()?>Mahasiswa/edit_usulan_lokasi/<?php echo $id ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </td>
                     <?php endforeach;?>
                   </tr>
                   </tbody>
                   <tfoot>
                   </tfoot>
                 </table>
-
               </div>
               <!-- /.card-body -->
             </div>
@@ -99,8 +117,8 @@
 
 <?php
                     foreach ($data->result_array() as $lokasi) :
-                       $id=$lokasi['id_lokasi'];
-                       $nama=$lokasi['nama_lokasi'];
+                       $id=$lokasi['id_lok_usul'];
+                       $nama=$lokasi['nama_lok'];
                        $alamat=$lokasi['alamat'];
                        $telp=$lokasi['telp'];
                        $kota=$lokasi['kota'];
@@ -112,13 +130,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Hapus Data Lokasi</h4>
+                        <h4 class="modal-title" id="myModalLabel">Hapus Data Usulan Lokasi Baru</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                     </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'Korbidpkl/delete_lokasi'?>" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="<?php echo base_url().'Mahasiswa/delete_usulan_lokasi'?>" method="post" enctype="multipart/form-data">
                      <div class="modal-body">       
                      <input type="hidden" name="id" value="<?php echo $id;?>"/> 
-                     <p>Apakah Anda akan menghapus pegawai bernama <b><?php echo $nama;?></b> ?</p>
+                     <p>Apakah Anda akan menghapus Lokasi yang telah di usulkan <b><?php echo $nama;?></b> ?</p>
                                
                     </div>
              
@@ -131,3 +149,9 @@
             </div>
         </div>
   <?php endforeach;?>
+    <script type='text/javascript'>
+
+function button_pengajuan() {
+    location.href='<?php echo base_url()?>Mahasiswa/tambah_usulan_lokasi';
+};
+  </script>

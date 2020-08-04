@@ -25,8 +25,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title"></h3>
-
-                <a href="<?php echo base_url()?>Admin/tambah_pegawai" target="_parent"><button type='button' class='btn btn-md btn-info '><i class='fa fa-plus' aria-hidden='true'></i> Tambah Pegawai </button></a></a>
+                <a href="<?php echo base_url()?>Admin/tambah_angkatan" target="_parent"><button type='button' class='btn btn-md btn-info '><i class='fa fa-plus' aria-hidden='true'></i> Tambah Angkatan </button></a></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -34,41 +33,31 @@
                   <thead>
                   <tr>
                     <th width="10">No</th>
-                    <th >NIP</th>
-                    <th>Nama Pegawai</th>
-                    <!--<th >Gelar depan</th>
-                    <th >Gelar Belakang</th>-->
-                    <th>Program Studi</th>
+                    <th>Tahun Angkatan</th>
                     <th width="10">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                    <?php
                     $no=1;
-                    foreach ($data->result_array() as $Pegawai) :
-                       $nip=$Pegawai['NIP'];
-                       $nama_pegawai=$Pegawai['nama_pegawai'];
-                       $gelar_depan=$Pegawai['gelar_depan'];
-                       $gelar_belakang=$Pegawai['gelar_belakang'];
-                       $prodi=$Pegawai['nama_prodi'];
+                    foreach ($data->result_array() as $angkatan) :
+                       $id=$angkatan['id_angkatan'];
+                       $angaktan=$angkatan['angkatan'];
                     ?>
                   <tr>
-                    <td width="10"><?php echo $no++ ?></td>
-                    <td><?php echo $nip ?></td>
-                    <td><?php echo $nama_pegawai ?></td>
-                    <!--<td><?php echo $gelar_depan ?></td>
-                    <td><?php echo $gelar_belakang ?></td>-->
-                    <td ><?php echo $prodi ?></td>
+                    <td><?php echo $no++ ?></td>
+                    <td><?php echo $angaktan ?></td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="<?php echo base_url()?>Admin/edit_pegawai/<?php echo $nip ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $nip;?>"><i class="fas fa-trash"></i></a>
+                        <a href="<?php echo base_url()?>Admin/edit_angkatan/<?php echo $id ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
                     <?php endforeach;?>
                   </tr>
                   </tbody>
                   <tfoot>
+
                   </tfoot>
                 </table>
               </div>
@@ -85,26 +74,22 @@
     <!-- /.content -->
 
                    <?php
-                    $no=0;
-                    foreach ($data->result_array() as $Pegawai) :
-                      $no++;
-                       $nip=$Pegawai['NIP'];
-                       $nama_pegawai=$Pegawai['nama_pegawai'];
-                       $gelar_depan=$Pegawai['gelar_depan'];
-                       $gelar_belakang=$Pegawai['gelar_belakang'];
-                       $prodi=$Pegawai['nama_prodi'];
-                    ?>        
-          <div class="modal fade" id="ModalHapus<?php echo $nip;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    $no=1;
+                    foreach ($data->result_array() as $angkatan) :
+                       $id=$angkatan['id_angkatan'];
+                       $angaktan=$angkatan['angkatan'];
+                    ?>
+          <div class="modal fade" id="ModalHapus<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Hapus Data Pegawai</h4>
+                        <h4 class="modal-title" id="myModalLabel">Hapus Data Tahun Angkatan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                     </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'Admin/delete_pegawai'?>" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="<?php echo base_url().'Admin/delete_angkatan'?>" method="post" enctype="multipart/form-data">
                      <div class="modal-body">       
-                     <input type="hidden" name="nip" value="<?php echo $nip;?>"/> 
-                     <p>Apakah Anda akan menghapus pegawai bernama <b><?php echo $nama_pegawai;?></b> ?</p>
+                     <input type="hidden" name="id" value="<?php echo $id;?>"/> 
+                     <p>Apakah Anda akan menghapus Angkatan <b><?php echo $angkatan;?></b> ?</p>
                                
                     </div>
              

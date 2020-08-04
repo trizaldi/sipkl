@@ -26,13 +26,13 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title"></h3>
-                <a href="<?php echo base_url()?>Korbidpkl/tambah_lokasi" target="_parent"><button type="button" class="btn btn-primary">Tambah</button></a>
+          
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id='example1' class='table table-bordered table-striped'>
                   <thead>
-                  <tr class='table-success'>
+                  <tr>
                     <th width='10'>No</th>
                     <th>Nama Lokasi</th>
                     <th>Alamat</th>
@@ -48,7 +48,7 @@
                     $no=1;
                     foreach ($data_usulan_lokasi->result_array() as $lokasi) :
                        $id_lokasi=$lokasi['id_lokasi'];
-                       $id=$lokasi['id_usulan'];
+                       $id_usulan=$lokasi['id_usulan'];
                        $nama=$lokasi['nama_lokasi'];
                        $alamat=$lokasi['alamat'];
                        $telp=$lokasi['telp'];
@@ -63,31 +63,29 @@
                     <td><?php echo $alamat ?></td>
                     <td><?php echo $telp ?></td>
                     <td><?php echo $kota ?></td>
-                    <td width="15"><a class='btn btn-success' data-toggle='modal' data-target='#ModalVerifikasi<?php echo $id;?>'><i class='btn btn-info btn-xs'></i></a>
+                    <td width="15">
                       <?php if ($status_usulan==1){
-                      echo "<a class='btn btn-success' data-toggle='modal' data-target='#ModalVerifikasi<?php echo $id;?>'><i class='btn btn-info btn-xs'></i></a>";
+                      echo "<h5><span class='badge badge-info'>Usulan</span></h5>";
 
-                      }elseif ($status_usulan=2) {
-                        echo 'Setujui';
+                      }elseif ($status_usulan==2) {
+                        echo "<h5><span class='badge badge-success'>Disetujui</span></h5>";
                       }
                       else{
-                        echo 'Ditolak';
+                        echo "<h5><span class='badge badge-danger'>Ditolak</span></h5>";
                       }
                       ?></td>
 
                     <td><?php if ($status_verifikasi==1){
-                      echo 'Belum Diverifikasi';
+                      echo "<h5><span class='badge badge-info'>Belum Diverifikasi</span></h5>";
                       }else{
-                        echo 'Telah Diverifikasi';
+                        echo "<h5><span class='badge badge-success'>Telah Diverifikasi</span></h5>";
                       }
                       ?></td>
                      <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <!--<a href="<?php echo base_url()?>Korbidpkl/tampil_ajuan_kelompok/<?php echo $id ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
-                        <button class="btn btn-primary view_detail" relid="<?php echo $id; ?>">View</button>
-
-                        <a href="<?php echo base_url()?>Korbidpkl/verifikasi_lokasi/<?php echo $id_lokasi ?>" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $id_lokasi;?>"><i class="fas fa-trash"></i></a>
+                      <a  class="btn btn-warning view_detail" relid="<?php echo $id_usulan; ?>"><i class="fa fa-search-plus"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalTolak<?php echo $id_usulan;?>"><i class="fa fa-ban"></i></a>
+                         <a class="btn btn-success" data-toggle="modal" data-target="#ModalVerifikasi<?php echo $id_usulan;?>"><i class="fa fa-check"></i></a>
                       </div>
                     </td> 
                     <?php endforeach;?>
@@ -109,36 +107,36 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-
 <?php
+                    $no=1;
                     foreach ($data_usulan_lokasi->result_array() as $lokasi) :
-                       $id=$lokasi['id_usulan'];
                        $id_lokasi=$lokasi['id_lokasi'];
+                       $id_usulan=$lokasi['id_usulan'];
                        $nama=$lokasi['nama_lokasi'];
                        $alamat=$lokasi['alamat'];
                        $telp=$lokasi['telp'];
                        $kota=$lokasi['kota'];
-                       $kode_pos=$lokasi['kode_pos'];
-                       $longitude=$lokasi['longitude'];
-                       $latitude=$lokasi['latitude'];
-                    ?>      
-          <div class="modal fade" id="ModalHapus<?php echo $id_lokasi;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                       $status_usulan=$lokasi['stat_usulan'];
+                       $status_verifikasi=$lokasi['stat_verifikasi'];
+
+                    ?>
+           <div class="modal fade" id="ModalTolak<?php echo $id_usulan;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Hapus Data Lokasi</h4>
+                        <h4 class="modal-title" id="myModalLabel">Menolak Lokasi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                     </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'Korbidpkl/delete_lokasi'?>" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="<?php echo base_url().'Korbidpkl/tolak_lokasi'?>/<?php echo $id_usulan ?>" method="post" enctype="multipart/form-data">
                      <div class="modal-body">       
-                     <input type="hidden" name="id" value="<?php echo $id;?>"/> 
-                     <p>Apakah Anda akan menghapus data lokasi <b><?php echo $nama;?></b> ?</p>
+                     <input type="hidden" name="id" value="<?php echo $id_usulan;?>"/>
+                     <p>Apakah Anda akan Menolak ajuan lokasi <b><?php echo $nama;?></b> ?</p>
                                
                     </div>
              
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-flat" id="simpan">Verifikasi</button>
                     </div>
                     </form>
                 </div>
@@ -149,7 +147,7 @@
 
 <?php
                     foreach ($data_usulan_lokasi->result_array() as $lokasi) :
-                       $id=$lokasi['id_usulan'];
+                       $id_usulan=$lokasi['id_usulan'];
                        $id_lokasi=$lokasi['id_lokasi'];
                        $nama=$lokasi['nama_lokasi'];
                        $alamat=$lokasi['alamat'];
@@ -159,23 +157,23 @@
                        $longitude=$lokasi['longitude'];
                        $latitude=$lokasi['latitude'];
                     ?>      
-           <div class="modal fade" id="ModalVerifikasi<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+           <div class="modal fade" id="ModalVerifikasi<?php echo $id_usulan;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">Verifikasi Data Lokasi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                     </div>
-                    <form class="form-horizontal" action="<?php echo base_url()?>Korbidpkl/verifikasi_lokasi/<?php echo $id_lokasi ?>" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="<?php echo base_url()?>Korbidpkl/verifikasi_lokasi/<?php echo $id_usulan ?>" method="post" enctype="multipart/form-data">
                      <div class="modal-body">       
-                     <input type="hidden" name="id" value="<?php echo $id;?>"/> 
-                     <p>Apakah Anda akan Menmverifikasi ajuan lokasi <b><?php echo $nama;?></b> ?</p>
+                     <input type="hidden" name="id" value="<?php echo $id_usulan;?>"/> 
+                     <p>Apakah Anda akan Memverifikasi ajuan lokasi <b><?php echo $nama;?></b> ?</p>
                                
                     </div>
              
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
+                        <button type="submit" class="btn btn-success btn-flat" id="simpan">Verifikasi</button>
                     </div>
                     </form>
                 </div>

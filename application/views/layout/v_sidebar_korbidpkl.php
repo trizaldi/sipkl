@@ -65,7 +65,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
+                <a href="<?php echo base_url()?>Korbidpkl/tampil_usulan_lokasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usulan Lokasi Baru</p>
                 </a>
@@ -73,7 +73,7 @@
             </ul>
              <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
+                <a href="<?php echo base_url()?>Korbidpkl/grafik" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Grafik</p>
                 </a>

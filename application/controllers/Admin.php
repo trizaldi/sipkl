@@ -13,12 +13,15 @@ class Admin extends CI_Controller {
  	$this->load->model('M_prodi');
   	$this->load->model('M_provinsi');
    	$this->load->model('M_kota');
+   	$this->load->model('M_angkatan');
+   	$this->load->model('M_tahun');
+   	$this->load->model('M_grafik');
   }
 public function index(){
 	if($this->session->userdata('akses')=='4'){
 		$isi['content'] 	='admin/v_dashboard_admin';
 		$isi['judul']		='Dashboard';
-		$isi['sub_judul']	='Pelajaran';
+		$isi['sub_judul']	='Home';
 		$this->load->view('layout/v_template',$isi);
 		    }else{
       $url=base_url();
@@ -31,7 +34,7 @@ public function tampil_mahasiswa(){
      	$isi['data']		=$this->M_mahasiswa->get_mahasiswa();
 		$isi['content'] 	='admin/v_mahasiswa';
 		$isi['judul']		='Mahasiswa';
-		$isi['sub_judul']	='Menu Mahasiswa';
+		$isi['sub_judul']	='Menu Master';
 		$this->load->view('layout/v_template',$isi);
     }else{
             $url=base_url();
@@ -136,12 +139,13 @@ function insert_pegawai(){
 	if($this->session->userdata('akses')=='4'){
 		$nip				=$this->input->post("nip");
 		$nama				=$this->input->post("nama");
-		$gelar				=$this->input->post("gelar");
+		$gelar_depan		=$this->input->post("gelar_depan");
+		$gelar_belakang		=$this->input->post("gelar_belakang");
 		$level				=$this->input->post("level");
 		$prodi				=$this->input->post("prodi");
 		$password			=$this->input->post("password");
 				
-		$this->M_pegawai->add($nip,$nama,$gelar,$level,$prodi,$password);
+		$this->M_pegawai->add($nip,$nama,$gelar_depan,$gelar_belakang,$level,$prodi,$password);
 		redirect("Admin/tampil_pegawai");
 		}else{
             $url=base_url();
@@ -167,12 +171,13 @@ public function update_pegawai(){
 	if($this->session->userdata('akses')=='4'){
 		$nip				=$this->input->post("nip");
 		$nama				=$this->input->post("nama");
-		$gelar				=$this->input->post("gelar");
+		$gelar_depan		=$this->input->post("gelar_depan");
+		$gelar_belakang		=$this->input->post("gelar_belakang");
 		$level				=$this->input->post("level");
 		$prodi				=$this->input->post("prodi");
 		$password			=$this->input->post("password");
 				
-		$this->M_pegawai->update_pegawai($nip,$nama,$gelar,$level,$prodi,$password);
+		$this->M_pegawai->update_pegawai($nip,$nama,$gelar_depan,$gelar_belakang,$level,$prodi,$password);
 		redirect("Admin/tampil_pegawai");
 		}else{
             $url=base_url();
@@ -422,6 +427,148 @@ function delete_prodi(){
 			redirect($url);
     }
 	}
+//Master Angkatan
+public function tampil_angkatan(){
+	if($this->session->userdata('akses')=='4'){
+     	$isi['data']		=$this->M_angkatan->get_angkatan();
+		$isi['content'] 	='admin/v_tampil_angkatan';
+		$isi['judul']		='Angkatan';
+		$isi['sub_judul']	='Menu master';
+		$this->load->view('layout/v_template',$isi);
+    }else{
+            $url=base_url();
+			redirect($url);
+    }
+}
+function tambah_angkatan(){
+	if($this->session->userdata('akses')=='4'){
+		$isi['angkatan']		=$this->M_angkatan->get_angkatan();
+		$isi['content'] 	='admin/v_tambah_angkatan';
+		$isi['judul']		='Prodi';
+		$isi['sub_judul']	='Menu Tambah Prodi';
+		$this->load->view('layout/v_template',$isi);
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+	}
+function insert_angkatan(){
+	if($this->session->userdata('akses')=='4'){
+		$angkatan		=$this->input->post("angkatan");
+		$this->M_angkatan->add($angkatan);
+		redirect("Admin/tampil_angkatan");
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+}
+function edit_angkatan(){
+	if($this->session->userdata('akses')=='4'){
+		$id =$this->uri->segment(3);
+		$isi['data_edit_angkatan']		=$this->M_angkatan->get_edit_angkatan($id);
+		$isi['content'] 				='admin/v_edit_angkatan';
+		$isi['judul']					='Angkatan';
+		$isi['sub_judul']				='Menu Edit Angkatan';
+		$this->load->view('layout/v_template',$isi);
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+	}
+public function update_angkatan(){
+	if($this->session->userdata('akses')=='4'){
+		$id					=$this->input->post("id");
+		$angkatan			=$this->input->post("angkatan");
+		$this->M_angkatan->update_angkatan($id,$angkatan);
+		redirect("Admin/tampil_angkatan");
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+	}	
+function delete_angkatan(){
+	if($this->session->userdata('akses')=='4'){
+		$id=$this->input->post('id');
+		$this->M_angkatan->delete_angkatan($id);
+		
+		echo $this->session->set_flashdata('msg','success-hapus');
+		redirect('Admin/tampil_angkatan');
+	}else{
+            $url=base_url();
+			redirect($url);
+    }
+	}
+//Master Tahun
+public function tampil_tahun(){
+	if($this->session->userdata('akses')=='4'){
+     	$isi['data']		=$this->M_tahun->get_tahun();
+		$isi['content'] 	='admin/v_tampil_tahun';
+		$isi['judul']		='Tahun';
+		$isi['sub_judul']	='Menu master';
+		$this->load->view('layout/v_template',$isi);
+    }else{
+            $url=base_url();
+			redirect($url);
+    }
+}
+function tambah_tahun(){
+	if($this->session->userdata('akses')=='4'){
+		$isi['tahun']		=$this->M_tahun->get_tahun();
+		$isi['content'] 	='admin/v_tambah_tahun';
+		$isi['judul']		='Tahun';
+		$isi['sub_judul']	='Menu Tambah Tahun';
+		$this->load->view('layout/v_template',$isi);
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+	}
+function insert_tahun(){
+	if($this->session->userdata('akses')=='4'){
+		$tahun		=$this->input->post("tahun");
+		$this->M_tahun->add($tahun);
+		redirect("Admin/tampil_tahun");
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+}
+function edit_tahun(){
+	if($this->session->userdata('akses')=='4'){
+		$id =$this->uri->segment(3);
+		$isi['data_edit_tahun']		=$this->M_tahun->get_edit_tahun($id);
+		$isi['content'] 				='admin/v_edit_tahun';
+		$isi['judul']					='Tahun';
+		$isi['sub_judul']				='Menu Edit Tahun';
+		$this->load->view('layout/v_template',$isi);
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+	}
+public function update_tahun(){
+	if($this->session->userdata('akses')=='4'){
+		$id					=$this->input->post("id");
+		$tahun			=$this->input->post("tahun");
+		$this->M_tahun->update_tahun($id,$tahun);
+		redirect("Admin/tampil_tahun");
+		}else{
+            $url=base_url();
+			redirect($url);
+    }
+	}	
+function delete_tahun(){
+	if($this->session->userdata('akses')=='4'){
+		$id=$this->input->post('id');
+		$this->M_tahun->delete_tahun($id);
+		
+		echo $this->session->set_flashdata('msg','success-hapus');
+		redirect('Admin/tampil_tahun');
+	}else{
+            $url=base_url();
+			redirect($url);
+    }
+	}
 //Master Provinsi
 public function tampil_provinsi(){
 	if($this->session->userdata('akses')=='4'){
@@ -567,5 +714,17 @@ function delete_kota(){
 			redirect($url);
     }
 	}
+public function grafik(){
+	if($this->session->userdata('akses')=='4'){
+     	$isi['data']		=$this->M_grafik->get_provinsi();
+		$isi['content'] 	='admin/v_tampil_provinsi';
+		$isi['judul']		='Provinsi';
+		$isi['sub_judul']	='Menu Provinsi';
+		$this->load->view('layout/v_template',$isi);
+    }else{
+            $url=base_url();
+			redirect($url);
+    }
+}
 
 }

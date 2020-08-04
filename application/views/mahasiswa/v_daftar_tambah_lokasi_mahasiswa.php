@@ -34,9 +34,11 @@
             <div class="row">
 
 <div class="container">
-  <form class="form-horizontal" action="<?php echo base_url()?>Mahasiswa/insert_ajukan_lokasi" method="post" enctype="multipart/form-data">
+  <!--<form class="form-horizontal" action="<?php echo base_url()?>Mahasiswa/insert_ajukan_lokasi" method="post" enctype="multipart/form-data">-->
+<form class="form-horizontal" enctype="multipart/form-data" id="myForm" >
 <input type="hidden" name="tahun" class="form-control" id="inputZip" required value="<?php echo $this->session->userdata('ses_angkatan')?>">
 <input type="hidden" name="nim_k" class="form-control" id="inputZip" required value="<?php echo $this->session->userdata('ses_id')?>">
+<input type="text" name="id" class="form-control" id="inputZip" required value="<?php echo $kode_usulan ?>">
   <div class="form-row">
     <div class="form-group col-md-5">
                   <label>Pilih Kota :</label>
@@ -49,13 +51,14 @@
                 </div>
     <div class="form-group col-md-5">
                   <label>Pilih Lokasi :</label>
-                  <select name="lokasi" id="lokasi" class="form-control select2" style="width: 100%;">
+                  <select name="lokasi" id="lokasi" class="form-control select2" required style="width: 100%;">
+                    <option value=""></option>
                   </select>
                 </div>
 
 </div>
   <a href="<?php echo base_url()?>Mahasiswa/daftar_pkl_langsung" class="btn btn-secondary">Kembali</a>
-  <button type="submit" class="btn btn-primary">Simpan Lokasi</button>
+  <button type="submit" id="submit" class="btn btn-primary">Simpan Lokasi</button>
 </form>
 </div>
           </div>
@@ -90,5 +93,27 @@
       });
     });
       });
+
+  $(function () {
+    $("#submit").click(function (event) {
+      var lokasi = $("#lokasi").val();
+      if (lokasi == ""){
+        alert('Data tidak boleh kosong');
+        location.reload();
+      }else{
+      var data = $('#myForm').serialize(); 
+        $.ajax({
+          type: "POST",
+          url: "<?php echo base_url()?>Mahasiswa/insert_ajukan_lokasi",
+          data: data,
+          success: function (data) {
+          alert('data berhasil di simpan');
+          window.location.href =('<?php echo base_url()?>Mahasiswa/daftar_pkl_langsung');
+          }
+        });
+      }
+      event.preventDefault();
+    });
+  });
   </script>
     

@@ -52,6 +52,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url()?>Admin/tampil_angkatan" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Angkatan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url()?>Admin/tampil_tahun" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Tahun</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url()?>Admin/tampil_provinsi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Provinsi</p>

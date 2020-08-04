@@ -41,20 +41,24 @@
 <div class="container">
   <form class="form-horizontal" action="<?php echo base_url()?>Admin/update_pegawai" method="post" enctype="multipart/form-data">
 <div class="form-row">
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-5">
       <label for="inputZip">NIP :</label>
       <input type="text" name="nip" class="form-control" id="inputZip" required readonly value="<?php echo $value->NIP; ?>" >
+    </div>
+        <div class="form-group col-md-5">
+      <label for="inputEmail4">Nama Pegawai :</label>
+      <input type="text" name="nama" class="form-control" id="inputEmail4" placeholder="Isi nama pegawai" required value="<?php echo $value->nama_pegawai; ?>">
     </div>
   </div>
 
 <div class="form-row">
     <div class="form-group col-md-5">
-      <label for="inputEmail4">Nama Pegawai :</label>
-      <input type="text" name="nama" class="form-control" id="inputEmail4" placeholder="Isi nama pegawai" required value="<?php echo $value->nama_pegawai; ?>">
+      <label for="inputEmail4">Gelar Depan :</label>
+      <input type="text" name="gela_depan" class="form-control" id="inputEmail4" placeholder="Isi gelar depan" value="<?php echo $value->gelar_depan; ?>">
     </div>
     <div class="form-group col-md-5">
-      <label for="inputPassword4">Gelar :</label>
-      <input type="text" name="gelar" class="form-control" id="inputPassword4" placeholder="isi gelar" required value="<?php echo $value->gelar; ?>">
+      <label for="inputPassword4">Gelar Belakang :</label>
+      <input type="text" name="gelar_belakang" class="form-control" id="inputPassword4" placeholder="isi gelar belakang" required value="<?php echo $value->gelar_belakang; ?>">
     </div>
   </div>
 <div class="form-row">

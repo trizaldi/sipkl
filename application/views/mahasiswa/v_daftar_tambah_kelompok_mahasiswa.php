@@ -1,72 +1,3 @@
-
-    <!-- 
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1><?php echo $judul; ?></h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"><?php echo $sub_judul; ?></a></li>
-              <li class="breadcrumb-item active"><?php echo $judul; ?></li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-
-        <div class="card card-default">
-          <div class="card-header">
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="row">
-
-<div class="container">
-  <form class="form-horizontal" action="<?php echo base_url()?>Mahasiswa/proses_daftar_mahasiswa" method="post" enctype="multipart/form-data">
-  <div class="form-row">
-    <div class="form-group col-md-5">
-                  <label>Pilih PRODI :</label>
-                  <select name="prodi" id="kota" class="form-control select2" style="width: 100%;">
-                  <?php foreach($data_prodi->result() as $row):?>
-                   <option value="<?php echo $row->id_prodi;?>"><?php echo $row->nama_prodi;?></option>
-                   <?php endforeach;?>
-
-                  </select>
-                </div>
-    <div class="form-group col-md-5">
-                  <label>Pilih Tahun Angkatan :</label>
-                  <select name="angkatan" id="kota" class="form-control select2" style="width: 100%;">
-                  <?php foreach($data_angkatan->result() as $row):?>
-                   <option value="<?php echo $row->id_angkatan;?>"><?php echo $row->angkatan;?></option>
-                   <?php endforeach;?>
-                  </select>
-                </div>            
-</div>
-  <a href="<?php echo base_url()?>Mahasiswa/daftar_pkl_langsung" class="btn btn-secondary">Kembali</a>
-  <button type="submit" name="Submit" class="btn btn-primary">Tampilkan</button>
-</form>
-</div>
-          </div>
-
-        </div>
-
-        </div>
-        </div>
-      </div>
-    </section>-->
-
-
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -100,7 +31,8 @@
 
 <!--Tabel baru -->
      <div class="card-body">
-<form class="form-horizontal" action="<?php echo base_url()?>Mahasiswa/insert_usulan_kelompok" method="post" enctype="multipart/form-data">
+<!--<form class="form-horizontal" action="<?php echo base_url()?>Mahasiswa/insert_usulan_kelompok" id="myForm" method="post" enctype="multipart/form-data">-->
+  <form class="form-horizontal" enctype="multipart/form-data" id="myForm">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -117,7 +49,8 @@
                     <td></td>
                     <td>Pilih Anggota Kelompok 1</td>
                     <td>:</td>
-                    <td><input type="hidden" name="mahasiswa_1" class="form-control" id="inputZip" readonly value="<?php echo $this->session->userdata('ses_id')?>">
+                    <td><input type="hidden" name="mahasiswa_1" class="form-control" id="mahasiswa_1" readonly value="<?php echo $this->session->userdata('ses_id')?>">
+                      <input type="hidden" name="id" class="form-control" id="mahasiswa_1" readonly value="<?php echo $kode_kelompok ?>">
                     <?php foreach($data_usulan_lokasi->result() as $row):?>
                     <input type="hidden" name="id_lokasi" class="form-control" id="inputZip" readonly value="<?php echo $row->id_usulan ?>">
                     <?php endforeach;?>
@@ -206,10 +139,12 @@
 
 
 
-  <a href="<?php echo base_url()?>Mahasiswa/tampil_mahasiswa" class="btn btn-secondary">Kembali</a>
-  <button type="submit" class="btn btn-primary">Simpan Kelompok</button>
+  <a href="<?php echo base_url()?>Mahasiswa/daftar_pkl_langsung" class="btn btn-secondary">Kembali</a>
+  <button type="submit" id="submit" class="btn btn-primary">Simpan Kelompok</button>
 </form>
-
+<div id="data"></div>
+<span class="error" style="display:none"> Please Enter Valid Data</span>
+<span class="success" style="display:none"> Form Submitted Success</span>
               </div>
 
               <!-- /.card-body -->
@@ -314,4 +249,46 @@
       });
     });
       });
+
+$(function () {
+    $("#submit").click(function (event) {
+      var mahasiswa_1 = $("#mahasiswa_1").val();
+      var mahasiswa_2 = $("#mahasiswa_2").val();
+      var mahasiswa_3 = $("#mahasiswa_3").val();
+      var mahasiswa_4 = $("#mahasiswa_4").val();
+      var mahasiswa_5 = $("#mahasiswa_5").val();
+      if (mahasiswa_1 == mahasiswa_2 || mahasiswa_1 == mahasiswa_3 || mahasiswa_1 == mahasiswa_4 || mahasiswa_1 == mahasiswa_5){
+        alert('Data tidak boleh sama dan Lengkapi data');
+        location.reload();
+      }else if(mahasiswa_2 == mahasiswa_1 || mahasiswa_2 == mahasiswa_3 || mahasiswa_2 == mahasiswa_4 || mahasiswa_2 == mahasiswa_5){
+        alert('Data tidak boleh sama dan Lengkapi data');
+        location.reload();
+      }else if(mahasiswa_3 == mahasiswa_1 || mahasiswa_3 == mahasiswa_2 || mahasiswa_3 == mahasiswa_4 || mahasiswa_3 == mahasiswa_5){
+        alert('Data tidak boleh sama dan Lengkapi data');
+        location.reload();
+      }else if(mahasiswa_4 == mahasiswa_1 || mahasiswa_4 == mahasiswa_2 || mahasiswa_4 == mahasiswa_3 || mahasiswa_4 == mahasiswa_5){
+        alert('Data tidak boleh sama dan Lengkapi data');
+        location.reload();
+      }else if(mahasiswa_5 == mahasiswa_1 || mahasiswa_5 == mahasiswa_2 || mahasiswa_5 == mahasiswa_3 || mahasiswa_5 == mahasiswa_4){
+        alert('Data tidak boleh sama dan Lengkapi data');
+        location.reload();
+      }else if( mahasiswa_2 == '' || mahasiswa_3 == '' || mahasiswa_4 == '' || mahasiswa_5 ==''){
+        alert('data tidak boleh kosong');
+        location.reload();
+      }      
+      else{
+      var data = $('#myForm').serialize(); 
+        $.ajax({
+          type: "POST",
+          url: "<?php echo base_url()?>Mahasiswa/insert_usulan_kelompok",
+          data: data,
+          success: function (data) {
+          alert('data berhasil di simpan');
+          window.location.href =('<?php echo base_url()?>Mahasiswa/daftar_pkl_langsung');
+          }
+        });
+      }
+      event.preventDefault();
+    });
+  });
   </script>

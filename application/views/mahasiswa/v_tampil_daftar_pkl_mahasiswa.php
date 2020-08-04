@@ -33,16 +33,17 @@
     {
       foreach ($data_usulan_lokasi->result() as $row)
       {
-               echo "<div class='alert alert-success' role='alert'>Anda Telah memilih lokasi PKL Silahkan Tunggu Verifikasi!</div>";
+               echo " <div class='container'> <div class='alert alert-success' role='alert'>
+    <strong>Berhasil! </strong>Anda Telah memilih lokasi PKL Silahkan Tunggu Verifikasi!</div></div>";
       }
       }
-      else
+      else      
       {
-        echo "<button type='button' onclick='button()' id='tombol_tambah_lokasi' class='btn btn-lg btn-primary'>Ajukan Lokasi PKL</button>";
-      }?>   
-                <table id='example1' class='table table-bordered table-striped'>
+        echo "<button type='button' class='btn btn-md btn-info ' onclick='button()' id='tombol_tambah_lokasi'><i class='fa fa-plus' aria-hidden='true'></i> Pengajuan Lokasi </button></a>";
+      }?>
+                <table id='example2' class='table table-bordered table-striped'>
                   <thead>
-                  <tr class='table-success'>
+                  <tr>
                     <th width='10'>No</th>
                     <th>Nama Lokasi</th>
                     <th>Alamat</th>
@@ -124,14 +125,18 @@
                echo "<div class='alert alert-success' role='alert'>Anda Telah Mengisi Data Kelompok Silahkan Tunggu Verifikasi!</div>";
       }
       }
-      else
+      else if($data_usulan_lokasi->num_rows()>0){
+              foreach ($data_usulan_lokasi->result() as $row)
       {
-        echo "<button type='button' onclick='tombol_kelompok()' id='tombol_tambah_lokasi'  class='btn btn-lg btn-danger'>Ajukan Kelompok PKL</button></a>";
+               echo "<button type='button' onclick='tombol_kelompok()' class='btn btn-md btn-info' id='tombol_tambah_lokasi'><i class='fa fa-plus' aria-hidden='true'></i> Pengajuan Kelompok </button></a>";
+      }
+      }
+      else{
+        echo " ";
       }?>   
-
-                <table id='example1' class='table table-bordered table-striped'>
+                <table id='example2' class='table table-bordered table-striped'>
                   <thead>
-                  <tr class='table-success'>
+                  <tr>
                     <th width='10'>No</th>
                     <th width='20%'>Identitas Kelompok</th>
                     <th width='20%'>NIM</th>

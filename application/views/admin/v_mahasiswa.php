@@ -26,7 +26,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title"></h3>
-                <a href="<?php echo base_url()?>Admin/tambah_mahasiswa" target="_parent"><button type="button" class="btn btn-primary">Tambah</button></a>
+                <a href="<?php echo base_url()?>Admin/tambah_mahasiswa" target="_parent"><button type='button' class='btn btn-md btn-info '><i class='fa fa-plus' aria-hidden='true'></i> Tambah Mahasiswa </button></a></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

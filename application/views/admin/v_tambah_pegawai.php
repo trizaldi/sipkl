@@ -36,20 +36,24 @@
 <div class="container">
   <form class="form-horizontal" action="<?php echo base_url()?>Admin/insert_pegawai" method="post" enctype="multipart/form-data">
 <div class="form-row">
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-5">
       <label for="inputZip">NIP :</label>
-      <input type="text" name="nip" class="form-control" id="inputZip" required>
+      <input type="text" name="nip" class="form-control" id="inputZip" placeholder="Isi NIP pegawai" required>
+    </div>
+      <div class="form-group col-md-5">
+      <label for="inputEmail4">Nama Pegawai :</label>
+      <input type="text" name="nama" class="form-control" id="inputEmail4" placeholder="Isi nama pegawai" required>
     </div>
   </div>
 
 <div class="form-row">
     <div class="form-group col-md-5">
-      <label for="inputEmail4">Nama Pegawai :</label>
-      <input type="text" name="nama" class="form-control" id="inputEmail4" placeholder="Isi nama pegawai" required>
+      <label for="inputEmail4">Gelar Depan :</label>
+      <input type="text" name="gelar_depan" class="form-control" id="inputEmail4" placeholder="Isi gelar depan" required>
     </div>
     <div class="form-group col-md-5">
-      <label for="inputPassword4">Gelar :</label>
-      <input type="text" name="gelar" class="form-control" id="inputPassword4" placeholder="isi gelar" required>
+      <label for="inputPassword4">Gelar Belakang :</label>
+      <input type="text" name="gelar_belakang" class="form-control" id="inputPassword4" placeholder="isi gelar belakang" required>
     </div>
   </div>
 <div class="form-row">
