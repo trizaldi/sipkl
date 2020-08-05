@@ -14,7 +14,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="fa fa-align-left" aria-hidden="true"></i>
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
               <p>
                 Menu Master
                 <i class="fas fa-angle-left right"></i>
@@ -32,7 +32,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-               <i class="fa fa-align-left" aria-hidden="true"></i>
+            <i class="fa fa-list-ul" aria-hidden="true"></i>
               <p>
                 Menu User
                 <i class="fas fa-angle-left right"></i>
@@ -50,7 +50,7 @@
 
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="fa fa-align-left" aria-hidden="true"></i>
+             <i class="fa fa-list-ul" aria-hidden="true"></i>
               <p>
                 Menu PKL
                 <i class="fas fa-angle-left right"></i>

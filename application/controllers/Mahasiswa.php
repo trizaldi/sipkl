@@ -67,18 +67,9 @@ function insert_lokasi(){
 //1. Pengajuan Lokasi
 public function daftar_pkl_langsung(){
 	if($this->session->userdata('akses')=='1'){
-     	$isi['data']				=$this->M_lokasi->get_lokasi();
-     	$isi['data_mahasiswa']		=$this->M_mahasiswa->get_mahasiswa();
-     	
-     	#Mahasiswa_bisa/tidak mengajukan data bila ada di tabel kelompok
-     	$isi['data_akses_mahasiswa']	=$this->M_mahasiswa->get_akses_mahasiswa();
-
-     	$isi['data_usulan_lokasi']	=$this->M_mahasiswa->get_usulan_lokasi();
-
-     	$isi['data']			=$this->M_kota->get_kota();
-     	$isi['data_prodi']		=$this->M_prodi->get_prodi();
-     	$isi['data_angkatan']		=$this->M_mahasiswa->get_angkatan();     	
-     	$isi['data_mahasiswa_1']	=$this->M_mahasiswa->mahasiswa_1();
+     	$isi['data_akses_mahasiswa']	=$this->M_mahasiswa->get_akses_mahasiswa();#Mahasiswa_bisa/tidak mengajukan data bila ada di tabel kelompok
+     	$isi['data_usulan_lokasi']	=$this->M_mahasiswa->get_usulan_lokasi();#menampilkan_usulan_lokasi_mahasiswa
+     	$isi['data_mahasiswa_1']	=$this->M_mahasiswa->mahasiswa_1();#menampilkan_data_kelompok_mahasiswa
      	$isi['data_mahasiswa_2']	=$this->M_mahasiswa->mahasiswa_2();
      	$isi['data_mahasiswa_3']	=$this->M_mahasiswa->mahasiswa_3();
      	$isi['data_mahasiswa_4']	=$this->M_mahasiswa->mahasiswa_4();

@@ -39,7 +39,7 @@
                     <!--<th >Gelar depan</th>
                     <th >Gelar Belakang</th>-->
                     <th>Program Studi</th>
-                    <th width="10">Aksi</th>
+                    <th width="12%">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -61,10 +61,9 @@
                     <td ><?php echo $prodi ?></td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="<?php echo base_url()?>Admin/edit_pegawai/<?php echo $nip ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $nip;?>"><i class="fas fa-trash"></i></a>
                       </div>
-                    </td>
+                        <a href="<?php echo base_url()?>Admin/edit_pegawai/<?php echo $nip ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $nip;?>"><i class="fa fa-eraser"></i></a>                </td>
                     <?php endforeach;?>
                   </tr>
                   </tbody>

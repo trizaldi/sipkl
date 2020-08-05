@@ -35,7 +35,7 @@
                     <th width="10">No</th>
                     <th>Prodi</th>
                     <th>Jurusan</th>
-                    <th width="10">Aksi</th>
+                    <th width="15%" colspan="2" class="text-center">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -50,12 +50,12 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $nama_prodi ?></td>
                     <td><?php echo $nama_jurusan ?></td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="<?php echo base_url()?>Admin/edit_prodi/<?php echo $id ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
+                    <td>
+                         <a href="<?php echo base_url()?>Admin/edit_prodi/<?php echo $id ?>" class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                      </td>
+                      <td>
+                        <div class="btn btn-danger btn-sm" data-toggle="modal" data-target="#ModalHapus<?php echo $id;?>"><i class="fa fa-eraser"></i></div>
+                      </td>
                     <?php endforeach;?>
                   </tr>
                   </tbody>

@@ -110,31 +110,37 @@ function get_mahasiswa_angkatan($id){
 
 function get_akses_mahasiswa(){
     $nim=$this->session->userdata('ses_id');
+    $cek_kelompok=$this->db->query("SELECT tmst_kelompok.id_usulan,tmst_usulan.id_usulan,tmst_usulan.id_lokasi,tmst_usulan.stat_usulan,tmst_usulan.stat_verifikasi,tm_lokasi.id_lokasi,tm_lokasi.nama_lokasi,tm_lokasi.alamat,tm_lokasi.telp,tm_lokasi.id_kota,tm_lokasi.kode_pos,tm_lokasi.longitude,tm_lokasi.latitude,tm_kota.id_kota,tm_kota.kota
+         FROM tmst_usulan INNER JOIN tm_lokasi ON tm_lokasi.id_lokasi=tmst_usulan.id_lokasi INNER JOIN tm_kota ON tm_kota.id_kota=tm_lokasi.id_kota INNER JOIN tmst_kelompok ON tmst_kelompok.id_usulan=tmst_usulan.id_usulan
+          WHERE tmst_kelompok.NIM_k='$nim' OR tmst_kelompok.NIM_a1='$nim' OR tmst_kelompok.NIM_a2='$nim' OR tmst_kelompok.NIM_a3='$nim' OR tmst_kelompok.NIM_a4='$nim' AND tmst_usulan.stat_usulan=1");
 
-        $query=$this->db->query("SELECT*FROM tmst_kelompok
-         JOIN tmst_usulan ON tmst_kelompok.id_usulan=tmst_usulan.id_usulan
-          WHERE tmst_kelompok.NIM_k='$nim'
-            OR tmst_kelompok.NIM_a1='$nim'
-            OR tmst_kelompok.NIM_a2='$nim'
-            OR tmst_kelompok.NIM_a3='$nim'
-            OR tmst_kelompok.NIM_a4='$nim'
-            AND tmst_usulan.stat_usulan='1'");
-        return $query;
+    //cek relasi status usulan (tm_mahasiswa dan tmst_usulan);
+        $cek_status_usulan=$this->db->query("SELECT tmst_usulan.id_usulan, tmst_usulan.id_lokasi, tmst_usulan.stat_usulan, tmst_usulan.stat_verifikasi, tm_lokasi.id_lokasi,tm_lokasi.nama_lokasi,tm_lokasi.alamat,tm_lokasi.telp,tm_lokasi.id_kota,tm_lokasi.kode_pos,tm_lokasi.longitude,tm_lokasi.latitude,tm_kota.id_kota,tm_kota.kota
+FROM tmst_usulan
+INNER JOIN tm_lokasi ON tm_lokasi.id_lokasi=tmst_usulan.id_lokasi
+INNER JOIN tm_kota ON tm_kota.id_kota=tm_lokasi.id_kota
+INNER JOIN tm_mahasiswa ON tm_mahasiswa.NIM=tmst_usulan.NIM_k
+WHERE tmst_usulan.NIM_k='$nim' AND tmst_usulan.stat_usulan=1");
+
+        if($cek_kelompok->num_rows() > 0){      
+             return $cek_kelompok;
+          }
+          else{
+           return $cek_status_usulan;   #$ymdhis=date('YmdHis').rand(100,999);
+          }
     }
-    function get_kode_usulan(){
-          $this->db->select('RIGHT(tmst_usulan.id_usulan,4) as kode', FALSE);
-          $this->db->order_by('id_usulan','DESC');    
-          $this->db->limit(1);       
-         $query = $this->db->query("SELECT id_prodi from tm_prodi
-WHERE tm_prodi.id_prodi='".$this->session->userdata('ses_prodi')."'");
-$usulan=$this->db->query("SELECT MAX(RIGHT(id_usulan,4)) AS id_usulan FROM tmst_usulan");
- foreach($query->result() as $data){
-        $prodi = $data->id_prodi;
-        $id_prodi=sprintf("%03s", $prodi);
-        $kode="";    
+    function get_kode_usulan(){   
+         $query = $this->db->query("SELECT id_prodi from tm_prodi WHERE tm_prodi.id_prodi='".$this->session->userdata('ses_prodi')."'");
+         $usulan=$this->db->query("SELECT MAX(RIGHT(id_usulan,4)) AS id_usulan FROM tmst_usulan");
+        foreach($query->result() as $data){
+            $prodi = $data->id_prodi;
+            $id_prodi=sprintf("%03s", $prodi);
+
+        #$kode="";    
           if($usulan->num_rows() > 0){      
              foreach($usulan->result() as $data){
-                $id = intval($data->id_usulan)+1;
+                #$id = intval($data->id_usulan)+1;
+                $id = (substr($data->id_usulan,-3)+1);
                 $kode = sprintf("%03s", $id);
 
             }
@@ -149,26 +155,20 @@ $usulan=$this->db->query("SELECT MAX(RIGHT(id_usulan,4)) AS id_usulan FROM tmst_
     }
 
    function get_usulan_lokasi(){
-        $query=$this->db->query("SELECT tmst_usulan.id_usulan,
-tmst_usulan.id_lokasi,
-tmst_usulan.stat_usulan,
-tmst_usulan.stat_verifikasi,
-tmst_usulan.NIM_k,
-tm_lokasi.id_lokasi,
-tm_lokasi.nama_lokasi,
-tm_lokasi.alamat,
-tm_lokasi.telp,
-tm_lokasi.id_kota,
-tm_lokasi.kode_pos,
-tm_lokasi.longitude,
-tm_lokasi.latitude,
-tm_kota.id_kota,
-tm_kota.kota
-FROM tmst_usulan
-INNER JOIN tm_lokasi ON tm_lokasi.id_lokasi=tmst_usulan.id_lokasi
-INNER JOIN tm_kota ON tm_kota.id_kota=tm_lokasi.id_kota
-WHERE tmst_usulan.NIM_k='".$this->session->userdata('ses_id')."' ");
-return $query;
+    $nim=$this->session->userdata('ses_id');
+    $cek_kelompok=$this->db->query("SELECT tmst_kelompok.id_usulan,tmst_usulan.id_usulan,tmst_usulan.id_lokasi,tmst_usulan.stat_usulan,tmst_usulan.stat_verifikasi,tm_lokasi.id_lokasi,tm_lokasi.nama_lokasi,tm_lokasi.alamat,tm_lokasi.telp,tm_lokasi.id_kota,tm_lokasi.kode_pos,tm_lokasi.longitude,tm_lokasi.latitude,tm_kota.id_kota,tm_kota.kota
+         FROM tmst_usulan INNER JOIN tm_lokasi ON tm_lokasi.id_lokasi=tmst_usulan.id_lokasi INNER JOIN tm_kota ON tm_kota.id_kota=tm_lokasi.id_kota INNER JOIN tmst_kelompok ON tmst_kelompok.id_usulan=tmst_usulan.id_usulan
+          WHERE tmst_kelompok.NIM_k='$nim' OR tmst_kelompok.NIM_a1='$nim' OR tmst_kelompok.NIM_a2='$nim' OR tmst_kelompok.NIM_a3='$nim' OR tmst_kelompok.NIM_a4='$nim'");
+
+        $cek_usulan=$this->db->query("SELECT tmst_usulan.id_usulan, tmst_usulan.id_lokasi, tmst_usulan.stat_usulan, tmst_usulan.stat_verifikasi, tm_lokasi.id_lokasi,tm_lokasi.nama_lokasi,tm_lokasi.alamat,tm_lokasi.telp,tm_lokasi.id_kota,tm_lokasi.kode_pos,tm_lokasi.longitude,tm_lokasi.latitude,tm_kota.id_kota,tm_kota.kota FROM tmst_usulan INNER JOIN tm_lokasi ON tm_lokasi.id_lokasi=tmst_usulan.id_lokasi INNER JOIN tm_kota ON tm_kota.id_kota=tm_lokasi.id_kota
+INNER JOIN tm_mahasiswa ON tm_mahasiswa.NIM=tmst_usulan.NIM_k
+WHERE tmst_usulan.NIM_k='$nim' OR tmst_usulan.NIM_k='$nim' OR tmst_usulan.NIM_k='$nim' OR tmst_usulan.NIM_k='$nim' OR tmst_usulan.NIM_k='$nim'");
+            if($cek_kelompok->num_rows() > 0){      
+             return $cek_kelompok;
+          }
+          else{
+           return $cek_usulan;   #$ymdhis=date('YmdHis').rand(100,999);
+          }
     }
 //2. Ajukan lokasi PKL
 function add_ajukan_lokasi_pkl($id,$lokasi,$tahun,$status_usulan,$status_verifikasi,$NIM_k){
@@ -210,6 +210,7 @@ function add_kelompok_pkl($id,$lokasi,$mahasiswa_1,$mahasiswa_2,$mahasiswa_3,$ma
     }
 //2. query tampil Usulan kelompok
 function mahasiswa_1(){
+    $nim=$this->session->userdata('ses_id');
         $hasil=$this->db->query("SELECT tm_mahasiswa.NIM,
          tm_mahasiswa.nama_mhs,
          tm_mahasiswa.telp,
@@ -220,10 +221,15 @@ function mahasiswa_1(){
          INNER JOIN tm_prodi ON tm_prodi.id_prodi=tm_mahasiswa.id_prodi
          INNER JOIN tm_angkatan ON tm_angkatan.id_angkatan=tm_mahasiswa.id_angkatan
          INNER JOIN tmst_kelompok ON tmst_kelompok.NIM_k=tm_mahasiswa.NIM
-         WHERE tmst_kelompok.NIM_k='".$this->session->userdata('ses_id')."'");
+WHERE tmst_kelompok.NIM_k='$nim'
+OR tmst_kelompok.NIM_a1='$nim'
+OR tmst_kelompok.NIM_a2='$nim'
+OR tmst_kelompok.NIM_a3='$nim'
+OR tmst_kelompok.NIM_a4='$nim'");
          return $hasil;
      }
 function mahasiswa_2(){
+    $nim=$this->session->userdata('ses_id');
         $hasil=$this->db->query("SELECT tm_mahasiswa.NIM,
          tm_mahasiswa.nama_mhs,
          tm_mahasiswa.telp,
@@ -234,10 +240,15 @@ function mahasiswa_2(){
          INNER JOIN tm_prodi ON tm_prodi.id_prodi=tm_mahasiswa.id_prodi
          INNER JOIN tm_angkatan ON tm_angkatan.id_angkatan=tm_mahasiswa.id_angkatan
          INNER JOIN tmst_kelompok ON tmst_kelompok.NIM_a1=tm_mahasiswa.NIM
-         WHERE tmst_kelompok.NIM_k='".$this->session->userdata('ses_id')."'");
+WHERE tmst_kelompok.NIM_k='$nim'
+OR tmst_kelompok.NIM_a1='$nim'
+OR tmst_kelompok.NIM_a2='$nim'
+OR tmst_kelompok.NIM_a3='$nim'
+OR tmst_kelompok.NIM_a4='$nim'");
          return $hasil;
      }
 function mahasiswa_3(){
+    $nim=$this->session->userdata('ses_id');
         $hasil=$this->db->query("SELECT tm_mahasiswa.NIM,
          tm_mahasiswa.nama_mhs,
          tm_mahasiswa.telp,
@@ -248,10 +259,15 @@ function mahasiswa_3(){
          INNER JOIN tm_prodi ON tm_prodi.id_prodi=tm_mahasiswa.id_prodi
          INNER JOIN tm_angkatan ON tm_angkatan.id_angkatan=tm_mahasiswa.id_angkatan
          INNER JOIN tmst_kelompok ON tmst_kelompok.NIM_a2=tm_mahasiswa.NIM
-         WHERE tmst_kelompok.NIM_k='".$this->session->userdata('ses_id')."'");
+WHERE tmst_kelompok.NIM_k='$nim'
+OR tmst_kelompok.NIM_a1='$nim'
+OR tmst_kelompok.NIM_a2='$nim'
+OR tmst_kelompok.NIM_a3='$nim'
+OR tmst_kelompok.NIM_a4='$nim'");
          return $hasil;
      }
 function mahasiswa_4(){
+    $nim=$this->session->userdata('ses_id');
         $hasil=$this->db->query("SELECT tm_mahasiswa.NIM,
          tm_mahasiswa.nama_mhs,
          tm_mahasiswa.telp,
@@ -262,10 +278,15 @@ function mahasiswa_4(){
          INNER JOIN tm_prodi ON tm_prodi.id_prodi=tm_mahasiswa.id_prodi
          INNER JOIN tm_angkatan ON tm_angkatan.id_angkatan=tm_mahasiswa.id_angkatan
          INNER JOIN tmst_kelompok ON tmst_kelompok.NIM_a3=tm_mahasiswa.NIM
-         WHERE tmst_kelompok.NIM_k='".$this->session->userdata('ses_id')."'");
+ WHERE tmst_kelompok.NIM_k='$nim'
+OR tmst_kelompok.NIM_a1='$nim'
+OR tmst_kelompok.NIM_a2='$nim'
+OR tmst_kelompok.NIM_a3='$nim'
+OR tmst_kelompok.NIM_a4='$nim'");
          return $hasil;
      }
 function mahasiswa_5(){
+    $nim=$this->session->userdata('ses_id');
         $hasil=$this->db->query("SELECT tm_mahasiswa.NIM,
          tm_mahasiswa.nama_mhs,
          tm_mahasiswa.telp,
@@ -276,7 +297,11 @@ function mahasiswa_5(){
          INNER JOIN tm_prodi ON tm_prodi.id_prodi=tm_mahasiswa.id_prodi
          INNER JOIN tm_angkatan ON tm_angkatan.id_angkatan=tm_mahasiswa.id_angkatan
          INNER JOIN tmst_kelompok ON tmst_kelompok.NIM_a4=tm_mahasiswa.NIM
-         WHERE tmst_kelompok.NIM_k='".$this->session->userdata('ses_id')."'");
+ WHERE tmst_kelompok.NIM_k='$nim'
+OR tmst_kelompok.NIM_a1='$nim'
+OR tmst_kelompok.NIM_a2='$nim'
+OR tmst_kelompok.NIM_a3='$nim'
+OR tmst_kelompok.NIM_a4='$nim'");
          return $hasil;
      }
 

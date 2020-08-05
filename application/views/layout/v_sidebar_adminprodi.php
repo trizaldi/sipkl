@@ -6,7 +6,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fa fa-home" aria-hidden="true"></i>
               <p>
                 Dashboard
               </p>
@@ -14,7 +14,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
               <p>
                 Menu Master
                 <i class="fas fa-angle-left right"></i>
@@ -23,7 +23,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?php echo base_url()?>Admin/tampil_mahasiswa" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-book" aria-hidden="true"></i>
                   <p>Data Mahasiswa</p>
                 </a>
               </li>
@@ -32,7 +32,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
               <p>
                 Menu User
                 <i class="fas fa-angle-left right"></i>
@@ -41,7 +41,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?php echo base_url()?>Admin/tampil_mahasiswa" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-user-circle" aria-hidden="true"></i>
                   <p>User</p>
                 </a>
               </li>
@@ -50,16 +50,16 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
               <p>
                 Menu Usulan
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>
+            </a> 
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?php echo base_url()?>Admin/tampil_mahasiswa" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-book" aria-hidden="true"></i>
                   <p>Usulan</p>
                 </a>
               </li>
@@ -67,7 +67,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?php echo base_url()?>Admin/tampil_mahasiswa" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-print" aria-hidden="true"></i>
                   <p>Cetak Dokumen</p>
                 </a>
               </li>
@@ -75,7 +75,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?php echo base_url()?>Admin/tampil_mahasiswa" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-book" aria-hidden="true"></i>
                   <p>Grafik</p>
                 </a>
               </li>

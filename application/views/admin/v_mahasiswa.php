@@ -39,7 +39,7 @@
                     <th>Nomor Telepon</th>
                     <th>Program Studi</th>
                     <th>Tahun angkatan</th>
-                    <th width="10">Aksi</th>
+                    <th width="12%">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -59,12 +59,11 @@
                     <td><?php echo $telp ?></td>
                     <td><?php echo $prodi ?></td>
                     <td><?php echo $angkatan ?></td>
-                    <td class="text-right py-0 align-middle">
+                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="<?php echo base_url()?>Admin/edit_mahasiswa/<?php echo $nim ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $nim;?>"><i class="fas fa-trash"></i></a>
                       </div>
-                    </td>
+                        <a href="<?php echo base_url()?>Admin/edit_mahasiswa/<?php echo $nim ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $nim;?>"><i class="fa fa-eraser"></i></a>                </td>
                     <?php endforeach;?>
                   </tr>
                   </tbody>

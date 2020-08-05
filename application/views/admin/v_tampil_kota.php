@@ -35,7 +35,7 @@
                     <th width="10">No</th>
                     <th>Kota</th>
                     <th>Provinsi</th>
-                    <th width="10">Aksi</th>
+                     <th width="12%">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -52,10 +52,10 @@
                     <td><?php echo $kota->nama_provinsi ?></td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="<?php echo base_url()?>Admin/edit_kota/<?php echo $kota->id_kota ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $kota->id_kota;?>"><i class="fas fa-trash"></i></a>
                       </div>
-                    </td>
+                        <a href="<?php echo base_url()?>Admin/edit_kota/<?php echo $kota->id_kota ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalHapus<?php echo $kota->id_kota;?>"><i class="fa fa-eraser"></i></a>                
+                      </td>
                     <?php } ?>
                   </tr>
                   </tbody>

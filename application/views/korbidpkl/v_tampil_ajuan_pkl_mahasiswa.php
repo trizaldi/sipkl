@@ -40,7 +40,7 @@
                     <th>Kota</th>
                     <th>Status Usulan</th>
                     <th>Status verifikasi</th>
-                    <th width="10">Aksi</th>
+                    <th width="17%">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -81,13 +81,13 @@
                         echo "<h5><span class='badge badge-success'>Telah Diverifikasi</span></h5>";
                       }
                       ?></td>
-                     <td class="text-right py-0 align-middle">
+                         <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                      <a  class="btn btn-warning view_detail" relid="<?php echo $id_usulan; ?>"><i class="fa fa-search-plus"></i></a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalTolak<?php echo $id_usulan;?>"><i class="fa fa-ban"></i></a>
-                         <a class="btn btn-success" data-toggle="modal" data-target="#ModalVerifikasi<?php echo $id_usulan;?>"><i class="fa fa-check"></i></a>
                       </div>
-                    </td> 
+                        <a class="btn btn-info view_detail" relid="<?php echo $id_usulan; ?>"><i class="fas fa-search-plus"></i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#ModalTolak<?php echo $id_usulan;?>"><i class="fa fa-ban" aria-hidden="true"></i></a>
+                        <a class="btn btn-success" data-toggle="modal" data-target="#ModalVerifikasi<?php echo $id_usulan;?>"><i class="fa fa-check-circle" aria-hidden="true"></i></a>                
+                      </td>
                     <?php endforeach;?>
                   </tr>
                   </tbody>

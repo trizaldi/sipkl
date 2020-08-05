@@ -29,54 +29,57 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/css/adminlte.min.css">
+  <!-- Login CSS -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/login.css">
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
- 
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Silahkan Login <small></small></h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form role="form" action="<?php echo base_url().'login/auth'?>" method="post" id="quickForm">
-                <div class="card-body">
-                  <?php echo $this->session->flashdata('msg');?>
-                  <div class="form-group">
-            <label for="exampleInputEmail1">Username</label>
-                    <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Username" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required autofocus="">
-                  </div>
-            <div class="checkbox">
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-          </form>
-            </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
-          </div>
-          <!--/.col (right) -->
+<body>
+<div>
+ <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+    <div class="container">
+        <a class="navbar-brand" href="#">SIPKL</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
+    </div>
+</nav>
 
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Silahkan Login Terlebih Dahulu</div>
+                    <form role="form" action="<?php echo base_url().'login/auth'?>" method="post" id="quickForm">
+                    <div class="card-body">
+                       <?php echo $this->session->flashdata('msg');?>
+                      <div class="form-group row">
+                                <label for="exampleInputEmail1" class="col-md-4 col-form-label text-md-right">Username</label>
+                                <div class="col-md-5">
+                                  <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Username" required>
+                                </div>
+                            </div>
 
-</div>
-<!-- /.login-box -->
+                            <div class="form-group row">
+                                <label for="exampleInputPassword1" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <div class="col-md-5">
+                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required autofocus="">
+                                </div>
+                            </div>
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-lock" aria-hidden="true"></i> Login </button>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</main>
 
 <!-- jQuery -->
 <script src="<?php echo base_url() ?>assets/plugins/jquery/jquery.min.js"></script>

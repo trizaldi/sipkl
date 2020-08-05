@@ -23,7 +23,7 @@
           <div class='col-12'>
             <div class='card'>
               <div class='card-header'>
-                <h3 class='card-title'><B>DATA PENGAJUAN LOKASI</B></h3>
+                <h3 class='card-title'><B>DATA PENGAJUAN LOKASI PKL</B></h3>
 
               </div>
 
@@ -41,7 +41,7 @@
       {
         echo "<button type='button' class='btn btn-md btn-info ' onclick='button()' id='tombol_tambah_lokasi'><i class='fa fa-plus' aria-hidden='true'></i> Pengajuan Lokasi </button></a>";
       }?>
-                <table id='example2' class='table table-bordered table-striped'>
+                <table id='example' class='table table-bordered table-striped'>
                   <thead>
                   <tr>
                     <th width='10'>No</th>
@@ -112,7 +112,7 @@
           <div class='col-12'>
             <div class='card'>
               <div class='card-header'>
-                <h3 class='card-title'><B>DATA KELOMPOK</B></h3>
+                <h3 class='card-title'><B>DATA PENGAJUAN KELOMPOK PKL</B></h3>
 
               </div>
               <div class='card-body'>
@@ -134,7 +134,7 @@
       else{
         echo " ";
       }?>   
-                <table id='example2' class='table table-bordered table-striped'>
+                <table id='example' class='table table-bordered table-striped'>
                   <thead>
                   <tr>
                     <th width='10'>No</th>
@@ -254,46 +254,6 @@ function tombol_kelompok() {
 };
   </script>
 
- <!-- <div id='ModalLokasi' class='modal fade bs-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='classInfo' aria-hidden='true'>
-  <div class='modal-dialog modal-lg'>
-    <div class='modal-content'>
-                    <div class='modal-header'>
-                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'><span class='fa fa-close'></span></span></button>
-                        <h4 class='modal-title' id='myModalLabel'><b>Ajukan Lokasi PKL</b></h4>
-                    </div>
-      <div class='modal-body'>
-<div class='container'>
-  <form class='form-horizontal' id='form_tambah_lokasi' method='post' enctype='multipart/form-data'>
-<input type='hidden' name='tahun' class='form-control' id='inputZip' required value=' <?php echo $this->session->userdata('ses_angkatan')?>'>
-  <div class='form-row'>
-    <div class='form-group col-md-5'>
-                  <label>Pilih Kota :</label>
-                  <select name='kota' id='kota' class='form-control select2' style='width: 100%;'>
-                  <?php foreach($data->result() as $row):?>
-                   <option value='<?php echo $row->id_kota;?>'><?php echo $row->kota;?></option>
-                   <?php endforeach;?>
-
-                  </select>
-                </div>
-    <div class='form-group col-md-5'>
-                  <label>Pilih Lokasi :</label>
-                  <select name='lokasi' id='lokasi' class='form-control select2' style='width: 100%;'>
-                  </select>
-                </div>                
-</div>
-  <a href='<?php echo base_url()?>Admin/tampil_mahasiswa' class='btn btn-secondary'>Kembali</a>
-  <button type='submit' id='save' class='btn btn-primary'>Simpan</button>
-</form>
-</div>
-      </div>
-      <div class='modal-footer'>
-        <button type='button' class='btn btn-primary' data-dismiss='modal'>
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>-->
 <script type='text/javascript'>
     $(document).ready(function(){
     $('#kota').change(function(){
